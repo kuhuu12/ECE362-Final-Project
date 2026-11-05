@@ -6,17 +6,25 @@
 #include "game.h"
 
 int main(void) {
-    tft_init();          // start each part once
-    input_init();
-    sound_init();
-    leds_init();
-    game_init();
+    stdio_init_all();
 
-    while (1) {          // then loop forever
-        bool flap = input_flap();
-        uint32_t ev = game_update(flap);
-        if (ev & EV_CRASHED) { sound_play(SND_GAMEOVER); leds_fill(40, 0, 0); }
-        sound_update();
-        sleep_ms(20);
+    init_gpio();
+    init_spi();
+    init_tft();
+
+    // Test the display
+    tft_fill_screen(BLUE);
+    sleep_ms(1000);
+
+    tft_fill_screen(GREEN);
+    sleep_ms(1000);
+
+    tft_fill_screen(BLACK);
+
+    // Draw one yellow pixel
+    tft_draw_pixel(120, 160, YELLOW);
+
+    while (true) {
+        tight_loop_contents();
     }
 }
