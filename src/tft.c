@@ -69,6 +69,10 @@ void init_tft_gpio(void) {
     gpio_init(TFT_RST);
     gpio_set_dir(TFT_RST, GPIO_OUT);
 
+    gpio_init(TFT_CS);
+    gpio_set_dir(TFT_CS, GPIO_OUT);
+    gpio_put(TFT_CS, 1);
+
     gpio_put(TFT_DC, 1);
     gpio_put(TFT_RST, 1);
 }
@@ -84,15 +88,13 @@ void reset_tft(void) {
 }
 
 //sends commands to the display
-gpio_init(TFT_CS);
-gpio_set_dir(TFT_CS, GPIO_OUT);
-gpio_put(TFT_CS, 1);
 
 void tft_write_command(uint8_t cmd) {
     gpio_put(TFT_CS, 0);
     gpio_put(TFT_DC, 0);
 
     spi_write_blocking(spi1, &cmd, 1);
+
 
     gpio_put(TFT_CS, 1);
 }

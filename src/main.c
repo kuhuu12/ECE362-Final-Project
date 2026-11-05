@@ -5,6 +5,8 @@
 #include "leds.h"
 #include "game.h"
 
+#include "pico/stdlib.h"   // stdio_init_all, gpio_get, sleep_ms
+#include "pins.h"          // BUTTON_PIN, if it's defined there
 int main(void) {
     // Initialize standard I/O
     stdio_init_all();

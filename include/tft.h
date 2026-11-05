@@ -16,4 +16,8 @@ void init_tft(void);
 void tft_fill_screen(uint16_t color);
 void tft_draw_pixel(uint16_t x, uint16_t y, uint16_t color);
 void tft_fill_rect(int x, int y, int w, int h, uint16_t color);
+void draw_game(void);
+void update_pipes(void);
+void update_score(void);
+void check_game_over(void);
 #endif
